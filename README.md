@@ -8,3 +8,5 @@
 4. php bin/console make:entity --regenerate
 5. App\Entity
 6. done
+# link web 
+1. https://127.0.0.1:8000/shoe-shop
