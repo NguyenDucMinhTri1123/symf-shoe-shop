@@ -19,6 +19,10 @@ class Bill_logRepository extends ServiceEntityRepository
         parent::__construct($registry, Bill_log::class);
     }
 
+    public function addOneBill(){
+
+    }
+
     // /**
     //  * @return Bill_log[] Returns an array of Bill_log objects
     //  */

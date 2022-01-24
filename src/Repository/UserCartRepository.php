@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\UserCart;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -22,7 +23,7 @@ class UserCartRepository extends ServiceEntityRepository
     // /**
     //  * @return UserCart[] Returns an array of UserCart objects
     //  */
-    /*
+    // find multi result
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('u')
@@ -34,17 +35,18 @@ class UserCartRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
-
-    /*
+    // find one field
     public function findOneBySomeField($value): ?UserCart
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        try {
+            return $this->createQueryBuilder('u')
+                ->andWhere('u.exampleField = :val')
+                ->setParameter('val', $value)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            return false;
+        }
     }
-    */
+
 }

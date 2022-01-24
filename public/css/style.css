@@ -432,7 +432,7 @@ footer.ctbh {
 	font-weight: bold;
 }
 .sanpham-item a {
-	font-size: 16px;
+	font-size: 14px!important;
 }
 .sanpham-image {
 	margin-top: 8px;
