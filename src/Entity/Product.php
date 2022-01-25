@@ -49,6 +49,10 @@ class Product
      */
     private $img_list;
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $img_show;
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $view;
@@ -246,6 +250,18 @@ class Product
     public function setCreatedAt(?\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getImgShow(): ?string
+    {
+        return $this->img_show;
+    }
+
+    public function setImgShow(?string $img_show): self
+    {
+        $this->img_show = $img_show;
 
         return $this;
     }

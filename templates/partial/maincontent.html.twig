@@ -1,206 +1,115 @@
-<!-- Slideshow container -->
-<div class="slideshow-container">
 
-    <div class="mySlides fade">
-        <div class="numbertext">1 / 3</div>
-        <img src="img/slide/slide1.jpg" style="width:100%">
-    </div>
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
 
-    <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="img/slide/slide2.jpg" style="width:100%">
-    </div>
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="img/slide/slide1.jpg" style="width:100%">
+        </div>
 
-    <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="img/slide/slide3.jpg" style="width:100%">
-    </div>
-</div>
-<br>
-{#main content#}
-<div class="panel">
-    <div id="Adidas" class="panel-heading">
-        <h1>ADIDAS</h1>
-    </div>
-    <div class="qcc">
-        <div class="borderr">
-            <div class="panel-body">
-                <div class="sanpham">
-                    {% for items in list_adidas %}
-                        <div class="sanpham-1 re-padding">
-                            <div class="sanpham-item">
-                                <div class="sanpham-name" >
-                                    <a href="" style="color: #337ab7; font-size: 14px">{{ items.name|e }}</a>
-                                </div>
-                                <div class="sanpham-image">
-                                    <img src="img/shoe/">
-                                </div>
-                                <div>
-                                    <p class="gia">Giá: <strong style="color: red;">{{ items.price|e}} VNĐ</strong></p>
-                                </div>
-                                <a href="">
-                                    <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="img/slide/slide2.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="img/slide/slide3.jpg" style="width:100%">
         </div>
     </div>
-</div>
-<div class="panel">
-    <div id="Nike" class="panel-heading">
-        <h1>Nike</h1>
-    </div>
-    <div class="qcc">
-        <div class="borderr">
-            <div class="panel-body">
-                <div class="sanpham">
-                    <div class="sanpham-1 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Nike Air Force 1 '07</a>
+    <br>
+    {#main content#}
+    <div class="panel">
+        <div id="Adidas" class="panel-heading">
+            <h1>ADIDAS</h1>
+        </div>
+        <div class="qcc">
+            <div class="borderr">
+                <div class="panel-body">
+                    <div class="sanpham">
+                        {% for items in list_adidas %}
+                            <div class="sanpham-1 re-padding">
+                                <div class="sanpham-item">
+                                    <div class="sanpham-name" >
+                                        <a href="" style="color: #337ab7; font-size: 14px">{{ items.name|e }}</a>
+                                    </div>
+                                    <div class="sanpham-image">
+                                        <img src="img/shoe/{{ items.getImgShow() }}">
+                                    </div>
+                                    <div>
+                                        <p class="gia">Giá: <strong style="color: red;">{{ items.price|e}} VNĐ</strong></p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="add_to_cart" items-id="{{ items.id|e }}">
+                                        <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/air-force-1-07-shoe-AKTdww3y.png">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">2.500.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sanpham-2 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Nike Air Force 1 Shadow</a>
-                            </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/air-force-1-shadow-shoe-klCJXd.png">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">3.239.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sanpham-3 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Nike Air Force 1 High '07 EMB</a>
-                            </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/air-force-1-high-07-emb-shoe-NZvJXr.png">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">3.369.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sanpham-4 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Nike Air Max Genome</a>
-                            </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/air-max-genome-shoe-lQ1nNw.png">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">4.400.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="panel">
-    <div id="Vans" class="panel-heading">
-        <h1>Vans</h1>
-    </div>
-    <div class="qcc">
-        <div class="borderr">
-            <div class="panel-body">
-                <div class="sanpham">
-                    <div class="sanpham-1 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Vans Slip-On Flame</a>
+    <div class="panel">
+        <div id="Nike" class="panel-heading">
+            <h1>Nike</h1>
+        </div>
+        <div class="qcc">
+            <div class="borderr">
+                <div class="panel-body">
+                    <div class="sanpham">
+                        {% for items in list_nike %}
+                            <div class="sanpham-1 re-padding">
+                                <div class="sanpham-item">
+                                    <div class="sanpham-name" >
+                                        <a href="" style="color: #337ab7; font-size: 14px">{{ items.name|e }}</a>
+                                    </div>
+                                    <div class="sanpham-image">
+                                        <img src="img/shoe/{{ items.getImgShow() }}">
+                                    </div>
+                                    <div>
+                                        <p class="gia">Giá: <strong style="color: red;">{{ items.price|e}} VNĐ</strong></p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="add_to_cart" items-id="{{ items.id|e }}">
+                                        <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/vn0a38f7phn-5.jpg">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">1.300.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sanpham-2 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Vans Slip-On Tiger Patchwork</a>
-                            </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/vn0a4u381io-6.jpg">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">1.450.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sanpham-3 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Vans Slip-On Anaheim</a>
-                            </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/vn0a3jexpu1-11.png">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">1.550.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sanpham-4 re-padding">
-                        <div class="sanpham-item">
-                            <div class="sanpham-name">
-                                <a href="" style="color: #337ab7">Vans Old Skool Skate</a>
-                            </div>
-                            <div class="sanpham-image">
-                                <img src="img/product/vn0a5fcby28-4.jpg">
-                            </div>
-                            <div>
-                                <p class="gia">Giá: <strong style="color: red;">2.200.000 VNĐ</strong></p>
-                            </div>
-                            <a href="">
-                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                            </a>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="panel">
+        <div id="Vans" class="panel-heading">
+            <h1>Vans</h1>
+        </div>
+        <div class="qcc">
+            <div class="borderr">
+                <div class="panel-body">
+                    <div class="sanpham">
+                        {% for items in list_vans %}
+                            <div class="sanpham-1 re-padding">
+                                <div class="sanpham-item">
+                                    <div class="sanpham-name" >
+                                        <a href="" style="color: #337ab7; font-size: 14px">{{ items.name|e }}</a>
+                                    </div>
+                                    <div class="sanpham-image">
+                                        <img src="img/shoe/{{ items.getImgShow() }}">
+                                    </div>
+                                    <div>
+                                        <p class="gia">Giá: <strong style="color: red;">{{ items.price|e}} VNĐ</strong></p>
+                                    </div>
+                                    <a href="javascript:void(0)" class="add_to_cart" items-id="{{ items.id|e }}">
+                                        <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</div>
+    </div>

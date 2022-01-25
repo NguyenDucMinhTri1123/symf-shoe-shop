@@ -20,21 +20,22 @@
                 <div class="col-8 menu">
                     <ul>
                         <li><a href="">Trang chủ</a></li>
-                        <li><a href="">Sản phẩm</a>
+                        <li><a>Sản phẩm</a>
                             <ul class="menu_child">
-                                <li><a href="#Adidas">Adidas</a></li>
-                                <li><a href="#Nike">Nike</a></li>
-                                <li><a href="#Vans">Vans</a></li>
+                                <li><a href="javascript:void(0)" class="adidas">Adidas</a></li>
+                                <li><a href="javascript:void(0)" class="nike">Nike</a></li>
+                                <li><a href="javascript:void(0)" class="vans">Vans</a></li>
                             </ul>
                         </li>
-                        <li class="shop"><a href="">Giỏ hàng</a></li>
-                        <li><a href="">Đăng nhập</a></li>
+                        <li class="shop"><a href="" class="cart">Giỏ hàng({{ cart }})</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </header>
-    {% include 'partial/maincontent.html.twig' %}
+    <div class="main_content">
+        {% include 'partial/maincontent.html.twig' %}
+    </div>
     {% include 'partial/script.html.twig' %}
 {#  footer#}
     <footer class="ctbh">

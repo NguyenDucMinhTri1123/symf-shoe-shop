@@ -381,6 +381,11 @@ ul.task li p {
 	margin-left: 250px;
 	margin-right: 284px;
 }
+.qcs {
+	display: flex;
+	margin-left: 250px;
+	margin-right: 284px;
+}
 .qc img {
 	width: 326px;
 }

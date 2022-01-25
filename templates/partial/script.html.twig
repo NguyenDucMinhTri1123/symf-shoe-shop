@@ -19,9 +19,22 @@
         }
         slides[slideIndex - 1].style.display = "block";
         // dots[slideIndex - 1].className += "active";
-        setTimeout(showSlides, 2000); // Change image every 2 seconds
+        setTimeout(showSlides, 4000); // Change image every 2 seconds
     }
 </script>
 <script>
     $('.menu_child').parent('li').addClass('has-child');
+    $(".adidas").click(function () {
+        $.post("/shoe-shop/adidas", { }, function (res) {
+            //alert("ok");
+            //console.log(res);
+            $(".main_content").html(res);
+        },'html');
+    });
+    $(".add_to_cart").click(function () {
+        let id = $(this).attr("items-id");
+        $.post("/shoe-shop/add-to-cart", { items_id: id }, function (res) {
+            $(".cart").text("Giỏ hàng("+res.data+")");
+        }, 'json');
+    });
 </script>
