@@ -26,8 +26,21 @@
     $('.menu_child').parent('li').addClass('has-child');
     $(".adidas").click(function () {
         $.post("/shoe-shop/adidas", { }, function (res) {
-            //alert("ok");
-            //console.log(res);
+            $(".main_content").html(res);
+        },'html');
+    });
+    $(".vans").click(function () {
+        $.post("/shoe-shop/vans", { }, function (res) {
+            $(".main_content").html(res);
+        },'html');
+    });
+    $(".nike").click(function () {
+        $.post("/shoe-shop/nike", { }, function (res) {
+            $(".main_content").html(res);
+        },'html');
+    });
+    $(".view_cart").click(function () {
+        $.post("/shoe-shop/view-cart", { }, function (res) {
             $(".main_content").html(res);
         },'html');
     });

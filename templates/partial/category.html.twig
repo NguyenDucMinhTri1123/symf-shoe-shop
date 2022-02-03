@@ -11,104 +11,34 @@
     <div class="border">
         <div class="panel-body">
             <div class="sanpham">
-                <div class="sanpham-1 re-padding">
-                    <div class="sanpham-item">
-                        <div class="sanpham-name">
-                            <a href="" style="color: #337ab7">Adidas Originals White</a>
+                {% for items in list_shoe %}
+                    <div class="sanpham-1 re-padding">
+                        <div class="sanpham-item">
+                            <div class="sanpham-name" >
+                                <a href="" style="color: #337ab7; font-size: 14px">{{ items.name|e }}</a>
+                            </div>
+                            <div class="sanpham-image">
+                                <img src="img/shoe/{{ items.getImgShow() }}">
+                            </div>
+                            <div>
+                                <p class="gia">Giá: <strong style="color: red;">{{ items.price|e}} VNĐ</strong></p>
+                            </div>
+                            <a href="javascript:void(0)" class="add_to_cart" items-id="{{ items.id|e }}">
+                                <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
+                            </a>
                         </div>
-                        <div class="sanpham-image">
-                            <img src="../img/product/Giay_Stan_Smith_trang_M20325_01_standard.jpg">
-                        </div>
-                        <div>
-                            <p class="gia">Giá: <strong style="color: red;">2.300.000 VNĐ</strong></p>
-                        </div>
-                        <a href="">
-                            <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                        </a>
                     </div>
-                </div>
-                <div class="sanpham-2 re-padding">
-                    <div class="sanpham-item">
-                        <div class="sanpham-name">
-                            <a href="" style="color: #337ab7">ADIDAS STAN SMITH PRIMEBLUE</a>
-                        </div>
-                        <div class="sanpham-image">
-                            <img src="../img/product/Giay_Stan_Smith_Primeblue_trang_FX5688_01_standard.jpg">
-                        </div>
-                        <div>
-                            <p class="gia">Giá: <strong style="color: red;">2.000.000 VNĐ</strong></p>
-                        </div>
-                        <a href="">
-                            <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                        </a>
-                    </div>
-                </div>
-                <div class="sanpham-3 re-padding">
-                    <div class="sanpham-item">
-                        <div class="sanpham-name">
-                            <a href="" style="color: #337ab7">Adidas Originals SUPERSTAR</a>
-                        </div>
-                        <div class="sanpham-image">
-                            <img src="../img/product/Giay_Superstar_trang_EG4958_01_standard.jpg">
-                        </div>
-                        <div>
-                            <p class="gia">Giá: <strong style="color: red;">1.369.000 VNĐ</strong></p>
-                        </div>
-                        <a href="">
-                            <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                        </a>
-                    </div>
-                </div>
-                <div class="sanpham-4 re-padding">
-                    <div class="sanpham-item">
-                        <div class="sanpham-name">
-                            <a href="" style="color: #337ab7">SUPERSTAR SIMPSONS SQUISHEE</a>
-                        </div>
-                        <div class="sanpham-image">
-                            <img src="../img/product/SUPERSTAR_SIMPSONS_SQUISHEE_mau_xanh_la_H05789_01_standard.jpg">
-                        </div>
-                        <div>
-                            <p class="gia">Giá: <strong style="color: red;">2.400.000 VNĐ</strong></p>
-                        </div>
-                        <a href="">
-                            <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                        </a>
-                    </div>
-                </div>
-                <div class="sanpham-5 re-padding">
-                    <div class="sanpham-item">
-                        <div class="sanpham-name">
-                            <a href="" style="color: #337ab7">ADIDAS ULTRABOOST DNA</a>
-                        </div>
-                        <div class="sanpham-image">
-                            <img src="../img/product/Giay_Ultraboost_DNA_Mau_xanh_da_troi_GW4925_01_standard.jpg">
-                        </div>
-                        <div>
-                            <p class="gia">Giá: <strong style="color: red;">3.900.000 VNĐ</strong></p>
-                        </div>
-                        <a href="">
-                            <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                        </a>
-                    </div>
-                </div>
-                <div class="sanpham-6 re-padding">
-                    <div class="sanpham-item">
-                        <div class="sanpham-name">
-                            <a href="" style="color: #337ab7">ADIDAS ULTRABOOST 21 X PARLEY</a>
-                        </div>
-                        <div class="sanpham-image">
-                            <img src="../img/product/Giay_Stan_Smith_trang_M20325_01_standard.jpg">
-                        </div>
-                        <div>
-                            <p class="gia">Giá: <strong style="color: red;">5.000.000 VNĐ</strong></p>
-                        </div>
-                        <a href="">
-                            <button class="btn btn-info"><span>Thêm vào giỏ hàng</span></button>
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
     <img src="../img/qc1.jpg">
 </div>
+<script>
+    $(".add_to_cart").click(function () {
+        let id = $(this).attr("items-id");
+        $.post("/shoe-shop/add-to-cart", { items_id: id }, function (res) {
+            $(".cart").text("Giỏ hàng("+res.data+")");
+        }, 'json');
+    });
+</script>
