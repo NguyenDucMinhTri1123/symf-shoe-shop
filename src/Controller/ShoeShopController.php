@@ -19,6 +19,7 @@ class ShoeShopController  extends AbstractController
         $this->entityManager = $this->getDoctrine()->getManager();
         $session = new Session();
         $cart=[];
+        //$this->view_data['total_price']=0;
         switch ($code) {
             case "adidas":
                 $this->view_data['list_shoe']=$this->entityManager->getRepository(Product::class)->getAllByType('adidas');
@@ -38,14 +39,39 @@ class ShoeShopController  extends AbstractController
                 array_push($cart,$items_id);
                 $session->set('cart',$cart);
                 return $this->OutputJson(true, count($session->get('cart')), "");
+            case "remove-one":
+                $items_id=$request->get("items_id");
+                $cart =$session->get('cart');
+                if(($key = array_search($items_id, $cart)) !== FALSE) {
+                    unset($cart[$key]);
+                }
+                $session->set('cart',$cart);
+                return $this->OutputJson(true, count($session->get('cart')), "");
+                break;
+            case "remove-type":
+                $items_id=$request->get("items_id");
+                $cart =$session->get('cart');
+                while(true){
+                    if(($key = array_search($items_id, $cart)) !== FALSE) {
+                        unset($cart[$key]);
+                    }else{
+                        break;
+                    }
+                }
+                $session->set('cart',$cart);
+                return $this->OutputJson(true, count($session->get('cart')), "");
+                break;
+                break;
+            case "remove-all":
+                $session->set('cart',[]);
+                return $this->OutputJson(true, count($session->get('cart')), "");
+                break;
             case "view-cart":
                 $cart=$session->get('cart');
                 $items = [];
                 $cart=array_unique($cart);
-                //dd($cart);
                 foreach ($cart as $item){
                     $shoe= $this->entityManager->getRepository(Product::class)->getProduct($item);
-                    //array_push($items[$shoe->getId().'id'],$shoe);
                     $shoe->setNumber(0);
                     $items[$shoe->getId()]=$shoe;
                 }
@@ -63,7 +89,17 @@ class ShoeShopController  extends AbstractController
                 //dd($items);
                 return $this->render('partial/cart.html.twig',$this->view_data);
                 break;
-            case "product-detail":
+            case "item-detail":
+                $items_id=$request->get("items_id");
+                $this->entityManager->getRepository(Product::class)->addViewTime($items_id);
+                $this->view_data['shoe']=$shoe= $this->entityManager->getRepository(Product::class)->getProduct($items_id);
+                $this->view_data['list_img']= explode("|", $shoe->getImgList());
+                return $this->render('partial/product-detail.html.twig',$this->view_data);
+                break;
+            case "process":
+                $price=$request->get("total_price");
+                $this->view_data['price']=$price;
+                return $this->render('partial/order.html.twig',$this->view_data);
                 break;
             default:
                 //$session->set('cart', $cart );

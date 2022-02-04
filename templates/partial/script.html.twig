@@ -44,10 +44,28 @@
             $(".main_content").html(res);
         },'html');
     });
-    $(".add_to_cart").click(function () {
+    $("body").on('click', '.add_to_cart', function () {
+    //$(".add_to_cart").click(function () {
         let id = $(this).attr("items-id");
         $.post("/shoe-shop/add-to-cart", { items_id: id }, function (res) {
-            $(".cart").text("Giỏ hàng("+res.data+")");
+            $(".view_cart").text("Giỏ hàng("+res.data+")");
+        }, 'json');
+    });
+    $("body").on('click', '.order_shoe', function () {
+        alert("Đơn hàng đã được gửi đi.")
+        $.post("/shoe-shop/remove-all", { }, function (res) {
+            $(".view_cart").text("Giỏ hàng("+res.data+")");
+            location.reload();
         }, 'json');
     });
 </script>
+<script>
+
+    $("body").on('click', '.item_detail', function () {
+        let id = $(this).attr("items-id");
+        $.post("/shoe-shop/item-detail", { items_id: id }, function (res) {
+            $(".main_content").html(res);
+        }, 'html');
+    });
+</script>
+

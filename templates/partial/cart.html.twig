@@ -23,26 +23,32 @@
                 </thead>
                 <tbody>
                 {% for items in shoe_Cart %}
-                    <tr>
+                    <tr id="item_{{ items.id|e }}" class="items">
                         <td style="width: 65px">{{ loop.index }}</td>
                         <td style="width: 330px;">{{ items.getName() }}</td>
                         <td style="width: 135px;">
                             <img src="img/shoe/{{ items.getImgShow() }}" class="img-thumnail" alt style="width: 75px;height: 65px;">
                         </td>
                         <td style="display: flex;width: 160px;">
-                            <a class="cart-sumsub" href="javascript:void(0)"   style="font-size: 18px;">-</a>
-                                <input type="text" value="{{ items.getNumber() }}" style="width: 40px; text-align: center;height: 35px;">
-                            <a class="cart-sumsub" href="javascript:void(0)" class="add_to_cart" items-id="{{ items.id|e }}" style="font-size: 18px;">+</a>
+                            <a class="cart-sumsub minus_one_cart" href="javascript:void(0)" items-id="{{ items.id|e }}" items-price="{{ items.getPrice() }}" style="font-size: 18px;">-</a>
+                                <input class="item_num_{{ items.id|e }}" type="text" value="{{ items.getNumber() }}" style="width: 40px; text-align: center;height: 35px;">
+                            <a class="cart-sumsub add_one_cart" href="javascript:void(0)" items-id="{{ items.id|e }}" items-price="{{ items.getPrice() }}" style="font-size: 18px;">+</a>
                         </td>
                         <td style="width: 190px">{{ items.getPrice() }} VNĐ</td>
                         <td style="width: 140px">
-                            <a href="javascript:void(0)" class="delete_item"><span class="trash" aria-hidden="true"></span></a>
+                            <a href="javascript:void(0)" class="delete_item" items-id="{{ items.id|e }}" items-price="{{ items.getPrice() }}">
+                                <span class="trash" aria-hidden="true"></span>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
+                    <tr >
+                        <td colspan="6" class="empty_alert" style="border-top:none">
+                        </td>
+                    </tr>
                     <tr>
                         <td colspan="4">Tổng tiền</td>
-                        <td style="font-weight: bold;color: green;">{{ total_price }} VNĐ</td>
+                        <td class="total_price" style="font-weight: bold;color: green;">{{ total_price }} VNĐ</td>
                         <td>
                             <a style="font-weight: bold;color: red;font-size: 17px;" href="javascript:void(0)" class="delete_all">Xóa toàn bộ</a>
                         </td>
@@ -58,3 +64,69 @@
     </div>
     <img src="../img/qc.png">
 </div>
+<script>
+    if({{ total_price }}==0){
+        $(".empty_alert").text("Giỏ Hàng Trống");
+    }
+    let total_price={{ total_price }}
+    $("body").on('click', '.add_one_cart', function () {
+            let id = $(this).attr("items-id");
+            let val= $(".item_num_"+id).val();
+
+            let price = $(this).attr("items-price");
+            total_price = parseInt(total_price) + parseInt(price);
+            $(".total_price").text(total_price+" VNĐ");
+
+            $(".item_num_"+id).val(parseInt(val) + 1);
+            $.post("/shoe-shop/add-to-cart", { items_id: id }, function (res) {
+                $(".view_cart").text("Giỏ hàng("+res.data+")");
+            }, 'json');
+        });
+    $("body").on('click', '.minus_one_cart', function () {
+        let id = $(this).attr("items-id");
+        let val= $(".item_num_"+id).val();
+
+        let price = $(this).attr("items-price");
+        total_price = parseInt(total_price) - parseInt(price);
+        if(val>1){
+            $(".total_price").text(total_price+" VNĐ");
+            $(".item_num_"+id).val(parseInt(val) - 1);
+            $.post("/shoe-shop/remove-one", { items_id: id }, function (res) {
+                $(".view_cart").text("Giỏ hàng("+res.data+")");
+            }, 'json');
+        }
+    });
+    $("body").on('click', '.delete_item', function () {
+        let id = $(this).attr("items-id");
+        let val= $(".item_num_"+id).val();
+        let price = $(this).attr("items-price");
+        total_price = parseInt(total_price) - parseInt(price) * parseInt(val);
+
+        $(".total_price").text(total_price+" VNĐ");
+        $("#item_"+id).text("");
+        $.post("/shoe-shop/remove-type", { items_id: id }, function (res) {
+            $(".view_cart").text("Giỏ hàng("+res.data+")");
+            $.post("/shoe-shop/view-cart", { }, function (res) {
+                alert("xóa loại hàng thành công.");
+                $(".main_content").html(res);
+                if(total_price==0){
+                    $(".empty_alert").text("Giỏ Hàng Trống");
+                }
+            },'html');
+        }, 'json');
+    });
+    $("body").on('click', '.delete_all', function () {
+        $(".total_price").text("0 VNĐ");
+        $(".items").text("");
+        $(".empty_alert").text("Giỏ Hàng Trống");
+        $.post("/shoe-shop/remove-all", { }, function (res) {
+            $(".view_cart").text("Giỏ hàng("+res.data+")");
+            alert("xóa giỏ hàng thành công.");
+        }, 'json');
+    });
+    $("body").on('click', '.buy_all', function () {
+        $.post("/shoe-shop/process", { total_price: total_price}, function (res) {
+            $(".main_content").html(res);
+        }, 'html');
+    });
+</script>

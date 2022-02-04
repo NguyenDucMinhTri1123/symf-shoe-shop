@@ -1,38 +1,38 @@
 <div class="breadcrumb">
     <ul class="task">
-        <li class="home"><a href="http://localhost/webbangiay/">Trang chủ</a></li>
-        <li class="slash"><a href="http://localhost/webbangiay/#Adidas">Adidas</a></li>
-        <li class="slash-2"><p>Adidas Originals White</p></li>
+        <li class="home"><a href="">Trang chủ</a></li>
+        <li class="slash"><a href="javascript:void(0)" class="adidas">Adidas</a></li>
+        <li class="slash-2"><p>{{ shoe.getName() }}</p></li>
     </ul>
 </div>
 <div class="tt">
     <a>Xem chi tiết sản phẩm</a>
 </div>
-<div class="qc">
+<div class="qcs">
     <div class="bor">
         <!-- Slideshow container -->
         <div class="slideshow-container">
 
             <!-- Full-width images with number and caption text -->
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 3</div>
-                <img src="../img/product/Giay_Stan_Smith_trang_M20325_01_standard.jpg" style="width:150%">
+            {% for img in list_img %}
+                <div class="mySlides fade">
+                    <div class="numbertext">{{ loop.index}} / 3</div>
+                    <img src="../img/shoe/{{ img }}" style="width:150%">
+                </div>
+            {% endfor %}
+{#            <div class="mySlides fade">#}
+{#                <div class="numbertext">2 / 3</div>#}
+{#                <img src="../img/product/Giay_Stan_Smith_trang_M20325_41_detail.jpg" style="width:150%">#}
 
-            </div>
+{#            </div>#}
 
-            <div class="mySlides fade">
-                <div class="numbertext">2 / 3</div>
-                <img src="../img/product/Giay_Stan_Smith_trang_M20325_41_detail.jpg" style="width:150%">
+{#            <div class="mySlides fade">#}
+{#                <div class="numbertext">3 / 3</div>#}
+{#                <img src="../img/product/Giay_Stan_Smith_trang_M20325_05_standard.jpg" style="width:150%">#}
 
-            </div>
-
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 3</div>
-                <img src="../img/product/Giay_Stan_Smith_trang_M20325_05_standard.jpg" style="width:150%">
-
-            </div>
+{#            </div>#}
             <!-- The dots/circles -->
-            <div class="left-right">
+            <div class="left-right" style="display: flex">
                 <span class="dot" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
@@ -46,10 +46,10 @@
             <p>Đôi giày kinh điển này có phong cách đa năng và thiết kế tối giản luôn nổi bật một cách tự nhiên</p>
             <p>CÁC CHI TIẾT KINH ĐIỂN</p>
             <p>Logo Stan Smith trên lưỡi gà và viền gót giày kết hợp với Ba Sọc đục lỗ</p>
-            <p><strong>Size: 9UK 10UK 11UK 11.5UK 12UK</strong></p>
-            <p>Giá: <span style="font-weight: bold;color: green;">2.300.000</span></p>
-            <p>Số lượt xem: 31</p>
-            <button class="btn btn-info">Thêm vào giỏ hàng</button>
+{#            <p><strong>Size: 9UK 10UK 11UK 11.5UK 12UK</strong></p>#}
+            <p>Giá: <span style="font-weight: bold;color: green;">{{ shoe.getPrice() }} VNĐ</span></p>
+            <p>Số lượt xem: {{ shoe.getView() }}</p>
+            <button class="btn btn-info"><a href="javascript:void(0)" class="add_to_cart" items-id="{{ shoe.getId() }}">Thêm vào giỏ hàng</a></button>
             <div class="chuthich">
                 <div class="ship">
                     <img src="../img/ship.png">
